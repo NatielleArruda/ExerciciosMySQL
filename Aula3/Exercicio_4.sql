@@ -9,13 +9,14 @@ ativo boolean not null,
 primary key (id)
 );
 
-insert into tb_categoria (descricao, ativo) values ("Bovino",true);
-insert into tb_categoria (descricao, ativo) values ("Suino",true);
-insert into tb_categoria (descricao, ativo) values ("Aves",true);
-insert into tb_categoria (descricao, ativo) values ("pertence feijoada",true);
-insert into tb_categoria (descricao, ativo) values ("imbutidos",true);
-insert into tb_categoria (descricao, ativo) values ("soja",true);
-insert into tb_categoria (descricao, ativo) values ("outros",true);
+insert into tb_categoria (descricao, ativo) values
+		("Bovino",true),
+		("Suino",true),
+		("Aves",true),
+		("pertence feijoada",true),
+		("imbutidos",true),
+		("soja",true),
+		("outros",true);
 
 select * from tb_categoria;
 
@@ -30,65 +31,35 @@ primary key (id),
 FOREIGN KEY (categoria_id) REFERENCES tb_categoria (id)
 );
 
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("ASA",40.00,30, "2021-11-07", 3);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Picanha",20.00,30, "2021-11-08", 1);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("coxa de frango",20.00,30, "2021-11-07", 3);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Bacon",30.00,30, "2021-11-09", 1);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("hamburguer",60.00,30, "2021-09-07", 5);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Cupim",20.00,30, "2021-11-10", 1);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Peito de frango",25.00,30, "2021-11-09", 3);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Orelha de porco",20.00,30, "2021-11-07", 4);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("Salame",18.00,30, "2021-11-21", 5);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("medalhao",50.00,30, "2021-11-15", 3);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("mocoto",20.00,30, "2021-10-05", 2);
-insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values ("chuleta",20.00,30, "2021-10-07", 1);
-insert into tb_produtos (nome, preco, qtProduto) values ("acendedor de churrasqueira",20.00,30);
-insert into tb_produtos (nome, preco, qtProduto) values ("soprador de churrasqueira",35.00,30);
+insert into tb_produtos (nome, preco, qtProduto, dtvalidade, categoria_id) values 
+		("ASA",40.00,30, "2021-11-07", 3),
+		("Picanha",20.00,30, "2021-11-08", 1),
+		("coxa de frango",20.00,30, "2021-11-07", 3),
+		("Bacon",30.00,30, "2021-11-09", 1),
+		("hamburguer",60.00,30, "2021-09-07", 5),
+		("Cupim",20.00,30, "2021-11-10", 1),
+		("Peito de frango",25.00,30, "2021-11-09", 3),
+		("Orelha de porco",20.00,30, "2021-11-07", 4),
+		("Salame",18.00,30, "2021-11-21", 5),
+		("medalhao",50.00,30, "2021-11-15", 3),
+		("mocoto",20.00,30, "2021-10-05", 2),
+		("chuleta",20.00,30, "2021-10-07", 1);
+
 
 select * from tb_produtos;
 
-select * from tb_produtos order by nome;
+select * from tb_produtos where preco > 50;
 
-select * from tb_produtos order by nome DESC;
+select * from tb_produtos where preco between 3 and 60;
 
-select * from tb_produtos where preco > 20 and categoria_id = 1;
+select * from tb_produtos where nome like "%c%";
 
-select * from tb_produtos where preco > 20 or categoria_id = 1;
-
-select * from tb_produtos where not categoria_id = 1;
-
-select * from tb_produtos where preco in (20, 30, 40);
-
-select * from tb_produtos where preco between 20 and 40;
-
-select * from tb_produtos where dtvalidade between '2021-11-07' and '2021-11-15';
-
-select * from tb_produtos where nome like "%ha";
-
-select * from tb_produtos where nome like "ha%";
-
-select * from tb_produtos where nome like "%ha%";
-
-select * from tb_produtos where nome like "%churrasqueira%";
-
-select count(*) from tb_produtos;
-
-select count(categoria_id) from tb_produtos;
-
-select sum(preco) from tb_produtos;
-
-select avg(preco) from tb_produtos;
-
-select categoria_id, avg(preco) from tb_produtos;
-
-select max(preco) from tb_produtos;
-
-select min(preco) as Menor_Preco from tb_produtos;
-
+select * from tb_produtos inner join tb_categoria
+on tb_categoria.id = tb_produtos.categoria_id;
 
 select tb_produtos.nome, tb_produtos.preco, tb_categoria.descricao
 from tb_produtos INNER JOIN tb_categoria
-on tb_categoria.id = tb_produtos.categoria_id;
+on tb_categoria.id = tb_produtos.categoria_id where tb_categoria = 5;
 
 
 
